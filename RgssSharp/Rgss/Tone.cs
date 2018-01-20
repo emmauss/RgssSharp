@@ -1,7 +1,11 @@
-﻿namespace RgssSharp.Rgss
+﻿using IronRuby.Builtins;
+
+namespace RgssSharp.Rgss
 {
 	public class Tone
 	{
+		public static readonly Tone NONE = new Tone(0.0f, 0.0f, 0.0f);
+
 		private float _red, _green, _blue, _gray;
 
 		public float Red
@@ -40,6 +44,18 @@
 			Green = green;
 			Blue = blue;
 			Gray = gray;
+		}
+
+		public MutableString _dump()
+		{
+			var array = new RubyArray(new[] { Red, Green, Blue, Gray });
+			return Ruby.Pack(array, "d4");
+		}
+
+		public static Tone _load(MutableString io)
+		{
+			dynamic data = Ruby.Unpack(io, "d4");
+			return new Tone((float)data[0], (float)data[1], (float)data[2], (float)data[3]);
 		}
 	}
 }

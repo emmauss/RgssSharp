@@ -21,6 +21,7 @@ namespace RgssSharp
 
 		public RgssPlayer()
 		{
+			Ruby.Initialize();
 			graphics = new GraphicsDeviceManager(this);
 		}
 

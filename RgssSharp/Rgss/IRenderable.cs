@@ -28,6 +28,16 @@ namespace RgssSharp.Rgss
 		/// </remarks>
 		int Z { get; set; }
 
+		bool Invaladited { get; set; }
+
+		/// <summary>
+		/// Gets or sets the opacity.
+		/// </summary>
+		/// <value>
+		/// The opacity.
+		/// </value>
+		int Opacity { get; set; }
+
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="IRenderable"/> is visible.
 		/// </summary>

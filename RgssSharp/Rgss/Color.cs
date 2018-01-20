@@ -1,4 +1,5 @@
 ﻿using System;
+using IronRuby.Builtins;
 using XnaColor = Microsoft.Xna.Framework.Color;
 using SD = System.Drawing;
 
@@ -84,6 +85,18 @@ namespace RgssSharp.Rgss
 				htmlColor = "#" + htmlColor;
 			var color = SD.ColorTranslator.FromHtml(htmlColor);
 			return new Color(color.R, color.G, color.B, color.A);
+		}
+
+		public MutableString _dump()
+		{
+			var array = new RubyArray(new[] { Red, Green, Blue, Alpha });
+			return Ruby.Pack(array, "d4");
+		}
+
+		public static Color _load(MutableString io)
+		{
+			dynamic data = Ruby.Unpack(io, "d4");
+			return new Color((float)data[0], (float)data[1], (float)data[2], (float)data[3]);
 		}
 
 		public static implicit operator XnaColor(Color color)

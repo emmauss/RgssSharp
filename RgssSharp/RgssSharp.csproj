@@ -105,11 +105,14 @@
     <Compile Include="Rgss\Plane.cs" />
     <Compile Include="Rgss\Rect.cs" />
     <Compile Include="Rgss\IRenderable.cs" />
+    <Compile Include="Rgss\RgssError.cs" />
     <Compile Include="Rgss\Sprite.cs" />
+    <Compile Include="Rgss\Table.cs" />
     <Compile Include="Rgss\Tilemap.cs" />
     <Compile Include="Rgss\Tone.cs" />
     <Compile Include="Rgss\Viewport.cs" />
     <Compile Include="Rgss\Window.cs" />
+    <Compile Include="Ruby.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

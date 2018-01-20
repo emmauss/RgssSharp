@@ -6,6 +6,8 @@ namespace RgssSharp.Rgss
 {
 	public struct Rect
 	{
+		public static readonly Rect EMPTY = new Rect(0, 0, 0, 0);
+
 		private Rectangle _rect;
 
 		public int X
