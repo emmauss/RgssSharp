@@ -67,7 +67,7 @@ namespace RgssSharp.Rgss
 			else
 			{
 				var color = GetRenderColor();
-				Graphics.SpriteBatch.Draw(Bitmap, vector, SrcRect, color, Angle, Vector2.Zero, scale, effect, 0);
+				Graphics.SpriteBatch.Draw(Bitmap, vector, SrcRect, color, Angle, Vector2.Zero, scale, effect, Z);
 			}
 		}
 

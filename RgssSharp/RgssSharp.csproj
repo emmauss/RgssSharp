@@ -12,7 +12,7 @@
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
     <XnaPlatform>Windows</XnaPlatform>
-    <XnaProfile>Reach</XnaProfile>
+    <XnaProfile>HiDef</XnaProfile>
     <XnaCrossPlatformGroupID>5932e00a-c9bc-4337-9345-c06d2b9b3791</XnaCrossPlatformGroupID>
     <XnaOutputType>Game</XnaOutputType>
     <ApplicationIcon>Game.ico</ApplicationIcon>
@@ -58,6 +58,9 @@
     <PlatformTarget>x86</PlatformTarget>
     <XnaCompressContent>true</XnaCompressContent>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>RgssSharp.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="IronRuby, Version=1.1.3.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
       <HintPath>..\..\packages\IronRuby.1.1.3\lib\IronRuby.dll</HintPath>
@@ -92,16 +95,18 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DirectBitmap.cs" />
+    <Compile Include="PinnedBitmap.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="NativeTextRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="RgssPlayer.cs" />
+    <Compile Include="Rgss\Audio.cs" />
     <Compile Include="Rgss\Bitmap.cs" />
     <Compile Include="Rgss\Color.cs" />
     <Compile Include="Rgss\Font.cs" />
     <Compile Include="Rgss\Graphics.cs" />
+    <Compile Include="Rgss\Input.cs" />
     <Compile Include="Rgss\Plane.cs" />
     <Compile Include="Rgss\Rect.cs" />
     <Compile Include="Rgss\IRenderable.cs" />
@@ -125,6 +130,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

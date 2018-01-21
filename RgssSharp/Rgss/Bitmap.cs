@@ -129,7 +129,7 @@ namespace RgssSharp.Rgss
 
 		public void DrawText(Rect rect, string text, TextAlign align = TextAlign.Left)
 		{
-			using (var bmp = new DirectBitmap(rect.Width, rect.Height))
+			using (var bmp = new PinnedBitmap(rect.Width, rect.Height))
 			{
 				using (var gfx = SD.Graphics.FromImage(bmp))
 				{

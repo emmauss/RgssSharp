@@ -31,12 +31,11 @@ namespace RgssSharp.Rgss
 		{
 			PendingRenders.Sort();
 			Draw();
-			PendingRenders.Clear();
 		}
 
 		private static void Draw()
 		{
-			SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+			SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
 			foreach (var render in PendingRenders)
 				render.Draw();
 			SpriteBatch.End();

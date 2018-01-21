@@ -67,7 +67,7 @@ namespace RgssSharp.Rgss
 				Graphics.Device.SetRenderTarget(this);
 				foreach (var render in PendingRenders)
 				{
-					if (!render.Invaladited || render.IsDisposed())
+					if (!render.Invaladited)
 						continue;
 					render.Draw();
 				}

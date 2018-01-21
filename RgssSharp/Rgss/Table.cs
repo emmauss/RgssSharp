@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using IronRuby;
 using IronRuby.Builtins;
 
 namespace RgssSharp.Rgss
@@ -17,7 +13,7 @@ namespace RgssSharp.Rgss
 
 		#region Public Properties
 
-		public short[] data { get; set; }
+		public short[] Data { get; set; }
 
 		/// <summary>
 		/// Accesses the array's elements. Pulls the same number of arguments as 
@@ -64,17 +60,17 @@ namespace RgssSharp.Rgss
 		/// <summary>
 		/// Gets the size of the Table on the x-axis
 		/// </summary>
-		public int xsize { get; set; }
+		public int Xsize { get; set; }
 
 		/// <summary>
 		/// Gets the size of the Table on the y-axis
 		/// </summary>
-		public int ysize { get; set; }
+		public int Ysize { get; set; }
 
 		/// <summary>
 		/// Gets the size of the Table on the z-axis
 		/// </summary>
-		public int zsize { get; set; }
+		public int Zsize { get; set; }
 
 		#endregion
 
@@ -116,11 +112,11 @@ namespace RgssSharp.Rgss
 		/// <param name="zSize">The size of the Table on the Z-axis.</param>
 		public Table(int xSize, int ySize, int zSize)
 		{
-			data = new short[0];
+			Data = new short[0];
 			xSize = xSize.Clamp(0, xSize);
 			ySize = ySize.Clamp(0, ySize);
 			zSize = zSize.Clamp(0, zSize);
-			resize(xSize, ySize, zSize);
+			Resize(xSize, ySize, zSize);
 		}
 
 		#endregion
@@ -131,9 +127,9 @@ namespace RgssSharp.Rgss
 		/// Resizes the table to the specified dimensions
 		/// </summary>
 		/// <param name="xSize">Size of the Table on the x-axis</param>
-		public void resize(int xSize)
+		public void Resize(int xSize)
 		{
-			resize(xSize, 1, 1);
+			Resize(xSize, 1, 1);
 		}
 
 		/// <summary>
@@ -141,9 +137,9 @@ namespace RgssSharp.Rgss
 		/// </summary>
 		/// <param name="xSize">Size of the Table on the x-axis</param>
 		/// <param name="ySize">Size of the Table on the y-axis</param>
-		public void resize(int xSize, int ySize)
+		public void Resize(int xSize, int ySize)
 		{
-			resize(xSize, ySize, 1);
+			Resize(xSize, ySize, 1);
 		}
 
 		/// <summary>
@@ -152,17 +148,17 @@ namespace RgssSharp.Rgss
 		/// <param name="xSize">Size of the Table on the x-axis</param>
 		/// <param name="ySize">Size of the Table on the y-axis</param>
 		/// <param name="zSize">Size of the Table on the z-axis</param>
-		public void resize(int xSize, int ySize, int zSize)
+		public void Resize(int xSize, int ySize, int zSize)
 		{
-			int oldXSize = xsize;
-			int oldYSize = ysize;
-			int copyXSize = Math.Min(xsize, xSize);
-			int copyYSize = Math.Min(ysize, ySize);
-			int copyZSize = Math.Min(zsize, zSize);
+			int oldXSize = Xsize;
+			int oldYSize = Ysize;
+			int copyXSize = Math.Min(Xsize, xSize);
+			int copyYSize = Math.Min(Ysize, ySize);
+			int copyZSize = Math.Min(Zsize, zSize);
 			int copySize = copyXSize * copyYSize * copyZSize;
-			xsize = Math.Max(xSize, 0);
-			ysize = Math.Max(ySize, 0);
-			zsize = Math.Max(zSize, 0);
+			Xsize = Math.Max(xSize, 0);
+			Ysize = Math.Max(ySize, 0);
+			Zsize = Math.Max(zSize, 0);
 			var newData = new short[xSize * ySize * zSize];
 			if (copySize > 0)
 			{
@@ -172,13 +168,13 @@ namespace RgssSharp.Rgss
 					{
 						for (int z = 0; z < copyZSize; z++)
 						{
-							newData[x + xsize * (y + ysize * z)] =
-								data[x + oldXSize * (y + oldYSize * z)];
+							newData[x + Xsize * (y + Ysize * z)] =
+								Data[x + oldXSize * (y + oldYSize * z)];
 						}
 					}
 				}
 			}
-			data = newData;
+			Data = newData;
 		}
 
 		#endregion
@@ -187,19 +183,19 @@ namespace RgssSharp.Rgss
 
 		private short GetData(int x, int y, int z)
 		{
-			if (xsize == 0 || ysize == 0 || zsize == 0)
+			if (Xsize == 0 || Ysize == 0 || Zsize == 0)
 				return 0;
-			x = x.Clamp(0, xsize - 1);
-			y = y.Clamp(0, ysize - 1);
-			z = z.Clamp(0, zsize - 1);
-			return data[x + xsize * (y + ysize * z)];
+			x = x.Clamp(0, Xsize - 1);
+			y = y.Clamp(0, Ysize - 1);
+			z = z.Clamp(0, Zsize - 1);
+			return Data[x + Xsize * (y + Ysize * z)];
 		}
 
 		private void SetData(int x, int y, int z, short value)
 		{
-			if (!x.IsBetween(0, xsize - 1) || !y.IsBetween(0, ysize - 1) || !z.IsBetween(0, zsize - 1))
+			if (!x.IsBetween(0, Xsize - 1) || !y.IsBetween(0, Ysize - 1) || !z.IsBetween(0, Zsize - 1))
 				return;
-			data[x + xsize * (y + ysize * z)] = value;
+			Data[x + Xsize * (y + Ysize * z)] = value;
 		}
 
 		#endregion
@@ -208,8 +204,8 @@ namespace RgssSharp.Rgss
 
 		public MutableString _dump()
 		{
-			var array = new RubyArray(new[] { 3, xsize, ysize, zsize, xsize * ysize * zsize });
-			array.AddRange(data);
+			var array = new RubyArray(new[] { 3, Xsize, Ysize, Zsize, Xsize * Ysize * Zsize });
+			array.AddRange(Data);
 			return Ruby.Pack(array, "LLLLLS*");
 		}
 
@@ -218,7 +214,7 @@ namespace RgssSharp.Rgss
 			dynamic data = Ruby.Unpack(io, "LLLLLS*");
 			var table = new Table(data[1], data[2], data[3]);
 			for (var i = 5; i < data.Count; i++)
-				table.data[i - 5] = (short)data[i];
+				table.Data[i - 5] = (short)data[i];
 			return table;
 		}
 
