@@ -40,6 +40,7 @@ namespace RgssSharp
 
 
 		private Rgss.Bitmap testBitmap;
+		private Rgss.Sprite sprite;
 
 		/// <summary>
 		/// LoadContent will be called once per game and is the place to load
@@ -80,6 +81,10 @@ namespace RgssSharp
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
 				this.Exit();
 
+
+			Rgss.Graphics.Update();
+			Rgss.Input.Update();
+
 			// TODO: Add your update logic here
 
 			base.Update(gameTime);
@@ -91,15 +96,11 @@ namespace RgssSharp
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime)
 		{
-			GraphicsDevice.Clear(Color.SlateBlue);
-
-
-			spriteBatch.Begin();
-
-			spriteBatch.Draw(testBitmap, new Rectangle(0, 0, 128, 32), Color.White);
-			spriteBatch.End();
-
-			// TODO: Add your drawing code here
+			
+			//GraphicsDevice.Clear(Color.SlateBlue);
+			//spriteBatch.Begin();
+			//spriteBatch.Draw(testBitmap, new Rectangle(0, 0, 128, 32), Color.White);
+			//spriteBatch.End();
 
 			base.Draw(gameTime);
 		}

@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Resources;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -7,9 +8,9 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("RgssSharp")]
 [assembly: AssemblyProduct("RgssSharp")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyCompany("Hewlett-Packard")]
-[assembly: AssemblyCopyright("Copyright © Hewlett-Packard 2018")]
+[assembly: AssemblyDescription("Managed .NET application using XNA and IronRuby to play RPG Maker XP games with enhanced performance, graphics, and extensibility.")]
+[assembly: AssemblyCompany("Eric \"ForeverZer0\" Freed")]
+[assembly: AssemblyCopyright("Copyright © Eric Freed 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,3 +33,5 @@ using System.Runtime.InteropServices;
 //      Revision
 //
 [assembly: AssemblyVersion("1.0.0.0")]
+[assembly: NeutralResourcesLanguage("")]
+

@@ -10,7 +10,7 @@ namespace RgssSharp
         /// </summary>
         private static void Main(string[] args)
         {
-            using (RgssPlayer game = new RgssPlayer())
+            using (var game = new RgssPlayer())
             {
                 game.Run();
             }

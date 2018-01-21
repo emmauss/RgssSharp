@@ -1,0 +1,13 @@
+﻿<h2># RgssSharp</h2>
+<h3><br />Managed .NET application written in C# using XNA 4.0 and IronRuby 1.1.3 to play native RPG Maker XP games with much higher performance and extensibility.</h3>
+<p>RPG Maker XP was a revolutionary application in the world of home-brew RPG creation software, and garnered a large community of fans. The inclusion using Ruby as an embedded scripting language set it apart from its predecessors, and exponentially expanded the possibilities of what could be done.</p>
+<p>The largest drawback was many of the core classes that Ruby acted as a wrapper for were closed off and incapable of being modified in any optimal way, and caused forward progress to come to a plateau.</p>
+<p>The aim of this application is to open the possibilities again, and remove the barriers that held back progress. The application targets the .NET Framework, using <a href="http://ironruby.net/">IronRuby 1.1.3</a> as replacement to the native version of Ruby found in RPG Maker XP. As for performance, this already drastically improves speed and potential, as well as introducing a newer equivalent version of the language. Although IronRuby was abandoned by Microsoft, it is more than enough complete and stable for this platform.</p>
+<p>Graphics, audio, and input will be handled via <a href="https://www.microsoft.com/en-us/download/details.aspx?id=23714">XNA 4.0</a>, using open-source C# code to wrap the XNA library to the RGSS library. Eventually, there are plans to translate all the C# code to Ruby scripts, therefore making the entire engine being written in the Ruby language and open without need for compiling any changes.</p>
+<p>One of the most exciting features is the amount of extensibility this can add to the application. IronRuby has the ability to load .NET assemblies and directly use them without the need for complicated interop, therefore the possibilities are endless on what can be included with a game.</p>
+<p>As an example, let's say we do not like the integrated use of XNA for audio. We would like to use <a href="https://github.com/naudio/NAudio">NAudio</a>, a popular managed audio library. Simply download the libraries, use</p>
+<blockquote>
+<p><strong>load_assembly 'NAudio'</strong></p>
+</blockquote>
+<p>within a script, and you can now use the NAudio library directly via writing Ruby scripts.</p>
+<p>The possibilities are endless, and there already exists an extensive collection of free and open-source projects online that target .NET Framework, and therefore can be used directly by the program.&nbsp;</p>
