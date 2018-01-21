@@ -95,6 +95,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NativeMethods.cs" />
     <Compile Include="PinnedBitmap.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="NativeTextRenderer.cs" />
@@ -130,7 +131,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

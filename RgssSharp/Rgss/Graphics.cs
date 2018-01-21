@@ -17,6 +17,8 @@ namespace RgssSharp.Rgss
 
 		public static SpriteBatch SpriteBatch { get; private set; }
 
+		public static List<string> PrivateFonts { get; } = new List<string>();
+
 
 		public static void Initialize(ref GraphicsDeviceManager manager, ref SpriteBatch spriteBatch)
 		{

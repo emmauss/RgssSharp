@@ -1,26 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
+using RgssSharp.Rgss;
+using Color = RgssSharp.Rgss.Color;
 
 namespace RgssSharp
 {
 	/// <summary>
 	/// This is the main type for your game
 	/// </summary>
-	public class RgssPlayer : Microsoft.Xna.Framework.Game
+	public class RgssPlayer : Game
 	{
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
+		
+
 
 		public RgssPlayer()
 		{
+			
 			Ruby.Initialize();
 			graphics = new GraphicsDeviceManager(this);
 		}
@@ -33,14 +31,14 @@ namespace RgssSharp
 		/// </summary>
 		protected override void Initialize()
 		{
-			// TODO: Add your initialization logic here
+
 
 			base.Initialize();
 		}
 
 
-		private Rgss.Bitmap testBitmap;
-		private Rgss.Sprite sprite;
+		private Bitmap testBitmap;
+		private Sprite sprite;
 
 		/// <summary>
 		/// LoadContent will be called once per game and is the place to load
@@ -51,11 +49,14 @@ namespace RgssSharp
 			
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
-			Rgss.Graphics.Initialize(ref graphics, ref spriteBatch);
+			Graphics.Initialize(ref graphics, ref spriteBatch);
+			Font.LoadFonts();
+			testBitmap = new Bitmap(128, 32);
 
-			testBitmap = new Rgss.Bitmap(128, 32);
-			testBitmap.FillRect(0, 0, 128, 32, new Rgss.Color(32, 32, 64));
-			testBitmap.DrawText(0, 0, 128, 32, "This is a test.");
+
+	
+			testBitmap.FillRect(0, 0, 128, 32, new Color(32, 32, 64));
+			testBitmap.DrawText(0, 0, 128, 32, "Optimus");
 
 
 			// TODO: use this.Content to load your game content here
@@ -67,7 +68,7 @@ namespace RgssSharp
 		/// </summary>
 		protected override void UnloadContent()
 		{
-			// TODO: Unload any non ContentManager content here
+
 		}
 
 		/// <summary>
@@ -79,11 +80,11 @@ namespace RgssSharp
 		{
 			// Allows the game to exit
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-				this.Exit();
+				Exit();
 
 
-			Rgss.Graphics.Update();
-			Rgss.Input.Update();
+			//Rgss.Graphics.Update();
+			Input.Update();
 
 			// TODO: Add your update logic here
 
@@ -97,10 +98,10 @@ namespace RgssSharp
 		protected override void Draw(GameTime gameTime)
 		{
 			
-			//GraphicsDevice.Clear(Color.SlateBlue);
-			//spriteBatch.Begin();
-			//spriteBatch.Draw(testBitmap, new Rectangle(0, 0, 128, 32), Color.White);
-			//spriteBatch.End();
+			GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.SlateBlue);
+			spriteBatch.Begin();
+			spriteBatch.Draw(testBitmap, new Rectangle(0, 0, 128, 32), Microsoft.Xna.Framework.Color.White);
+			spriteBatch.End();
 
 			base.Draw(gameTime);
 		}
