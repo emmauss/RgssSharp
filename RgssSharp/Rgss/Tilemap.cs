@@ -7,5 +7,6 @@ namespace RgssSharp.Rgss
 {
 	public class Tilemap
 	{
+
 	}
 }

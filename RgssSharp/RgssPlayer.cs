@@ -53,10 +53,10 @@ namespace RgssSharp
 			Font.LoadFonts();
 			testBitmap = new Bitmap(128, 32);
 
-
+			testBitmap.Font = new Rgss.Font("OptimusPrinceps", 18);
 	
-			testBitmap.FillRect(0, 0, 128, 32, new Color(32, 32, 64));
-			testBitmap.DrawText(0, 0, 128, 32, "Optimus");
+			testBitmap.FillRect(8, 8, 96, 16, new Color(255, 32, 64, 240));
+			testBitmap.DrawText(32, 0, 128, 32, "Optimus");
 
 
 			// TODO: use this.Content to load your game content here

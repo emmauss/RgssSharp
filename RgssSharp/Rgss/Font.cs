@@ -170,7 +170,7 @@ namespace RgssSharp.Rgss
 		/// <param name="filename">The filename to load (*.ttf, *.otf, *.fnt).</param>
 		public static void AddFont(string filename)
 		{
-			NativeMethods.AddFontResourceEx(filename, NativeMethods.FR_PRIVATE, IntPtr.Zero);
+			Gdi32.AddFontResourceEx(filename, Gdi32.FR_PRIVATE, IntPtr.Zero);
 			using (var stream = File.OpenRead(filename))
 			{
 				var length = (int) stream.Length;
@@ -192,7 +192,7 @@ namespace RgssSharp.Rgss
 		/// <returns>A newly created <see cref="SD.Font"/>.</returns>
 		private static SD.Font Create(string familyName, float size, SD.FontStyle style)
 		{
-			var family = _privateFonts.Families.First(f => f.Name == familyName) ?? new SD.FontFamily(familyName);
+			var family = _privateFonts.Families.FirstOrDefault(f => f.Name == familyName) ?? new SD.FontFamily(familyName);
 			return new SD.Font(family, size, style, SD.GraphicsUnit.Pixel);
 		}
 
@@ -393,6 +393,17 @@ namespace RgssSharp.Rgss
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Font"/> class.
 		/// </summary>
+		/// <param name="font">The <see cref="SD.Font"/> to create it from.</param>
+		/// <param name="color">The <see cref="Rgss.Color"/> to use for rendering.</param>
+		public Font(SD.Font font, Color color)
+		{
+			Color = color;
+			_font = font;
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Font"/> class.
+		/// </summary>
 		/// <param name="name">The name.</param>
 		public Font(string name) : 
 			this(name, DefaultSize, DefaultColor, DefaultBold, DefaultItalic, DefaultUnderline, DefaultStrikeout)
@@ -436,7 +447,7 @@ namespace RgssSharp.Rgss
 		public Font(string name, float size, Color color, bool bold, bool italic, bool underline, bool strikeout)
 		{
 			Color = color;
-			_font = new SD.Font(name, size, GetStyle(bold, italic, underline, strikeout), SD.GraphicsUnit.Pixel);
+			_font = Create(name, size, GetStyle(bold, italic, underline, strikeout));
 		}
 
 		/// <summary>

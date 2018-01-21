@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using IronRuby.Runtime;
+using IronRuby.StandardLibrary.Yaml;
 using Microsoft.Xna.Framework.Graphics;
 using SD = System.Drawing;
 using XnaColor = Microsoft.Xna.Framework.Color;
@@ -124,16 +125,22 @@ namespace RgssSharp.Rgss
 
 		public void DrawText(int x, int y, int width, int height, string text, TextAlign align = TextAlign.Left)
 		{
-			DrawText(new Rect(x, y, width, height), text, align);
+			var rect = new Rect(x, y, Math.Min(Width - x, width), Math.Min(Height - y, height));
+			DrawText(rect, text, align);
 		}
 
 		public void DrawText(Rect rect, string text, TextAlign align = TextAlign.Left)
 		{
+			// Create new bitmap with its allotted memory pinned
 			using (var bmp = new PinnedBitmap(rect.Width, rect.Height))
 			{
+				// TODO: Clamp out of range Rects, or allow to throw exception...????????
+				// Copy source pixels over to memory section
+				GetData(0, rect, bmp.Bits, 0, bmp.Bits.Length);
 				using (var gfx = SD.Graphics.FromImage(bmp))
 				{
-					using (var renderer = new NativeTextRenderer(gfx))
+					// Render the text using native GDI functions, not GDI+, because it is horrible and slow.
+					using (var renderer = new RgssTextRenderer(gfx))
 					{
 						var flags = TextFormatFlags.SingleLine;
 						if (align == TextAlign.Center)
@@ -143,7 +150,8 @@ namespace RgssSharp.Rgss
 						renderer.DrawString(text, Font, Font.Color, rect, flags);
 					}
 				}
-				SetData(bmp.Bits);
+				// Set the altered bits back to the source
+				SetData(0, rect, bmp.Bits, 0, bmp.Bits.Length);
 			}
 		}
 
