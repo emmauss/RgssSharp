@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -11,6 +12,9 @@ namespace RgssSharp
 	/// </summary>
 	public class RgssPlayer : Game
 	{
+		public bool Debug { get; set; }
+
+
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 		
@@ -51,12 +55,27 @@ namespace RgssSharp
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 			Graphics.Initialize(ref graphics, ref spriteBatch);
 			Font.LoadFonts();
-			testBitmap = new Bitmap(128, 32);
 
-			testBitmap.Font = new Rgss.Font("OptimusPrinceps", 18);
-	
-			testBitmap.FillRect(8, 8, 96, 16, new Color(255, 32, 64, 240));
-			testBitmap.DrawText(32, 0, 128, 32, "Optimus");
+			testBitmap = new Bitmap("012-Lancer04.png");
+
+			/*
+			var timer = new Stopwatch();
+			var counter = 5000;
+			timer.Start();
+			do
+			{
+
+			} while (counter > 0);
+			timer.Stop();
+			var ms = timer.ElapsedMilliseconds / 5000f;
+			*/
+
+
+			testBitmap.HueChange(60);
+			//testBitmap.Font = new Rgss.Font("OptimusPrinceps", 18);
+
+			//testBitmap.FillRect(8, 8, 96, 16, new Color(255, 32, 64, 240));
+			//testBitmap.DrawText(0, 0, 128, 32, "New Game");
 
 
 			// TODO: use this.Content to load your game content here
@@ -100,7 +119,7 @@ namespace RgssSharp
 			
 			GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.SlateBlue);
 			spriteBatch.Begin();
-			spriteBatch.Draw(testBitmap, new Rectangle(0, 0, 128, 32), Microsoft.Xna.Framework.Color.White);
+			spriteBatch.Draw(testBitmap, testBitmap.Rect, Microsoft.Xna.Framework.Color.White);
 			spriteBatch.End();
 
 			base.Draw(gameTime);

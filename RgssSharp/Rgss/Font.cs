@@ -5,6 +5,7 @@ using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using RgssSharp.Win32;
 using SD = System.Drawing;
 
 
@@ -28,7 +29,7 @@ namespace RgssSharp.Rgss
 		/// <summary>
 		/// The instance of the internally used default <see cref="SD.Font"/>.
 		/// </summary>
-		private static SD.Font _default = new SD.Font("MS PGothic", 22, SD.FontStyle.Regular, SD.GraphicsUnit.Pixel);
+		private static SD.Font _default = new SD.Font("Arial", 22, SD.FontStyle.Regular, SD.GraphicsUnit.Pixel);
 		/// <summary>
 		/// The level of tolerance for comparing float values of font sizes.
 		/// </summary>
