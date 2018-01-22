@@ -1,12 +1,14 @@
 ﻿using System;
 using IronRuby.Builtins;
+using IronRuby.Runtime;
 using XnaColor = Microsoft.Xna.Framework.Color;
 using SD = System.Drawing;
 
 namespace RgssSharp.Rgss
 {
-
-	public struct Color
+	[RubyClass("Color", Inherits = typeof(Object))]
+	[Serializable]
+	public class Color
 	{
 		public static readonly Color WHITE = new Color(255, 255, 255);
 		public static readonly Color BLACK = new Color(0, 0, 0);

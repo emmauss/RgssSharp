@@ -1,17 +1,24 @@
 ﻿using System;
+using IronRuby.Runtime;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using XnaColor = Microsoft.Xna.Framework.Color;
 
 namespace RgssSharp.Rgss
 {
+	[RubyClass("Sprite", Inherits = typeof(Object))]
 	public class Sprite : IRenderable
 	{
+		private bool _isDisposed;
+
 		public Sprite(Viewport viewport = null)
 		{
 			Viewport = viewport;
+			if (Viewport != null)
+				Viewport.AddRender(this);
+			else
+				Graphics.AddRender(this);
 		}
-
 
 		public Viewport Viewport { get; } 
 
@@ -32,8 +39,6 @@ namespace RgssSharp.Rgss
 		public Bitmap Bitmap { get; set; }
 
 		public Rect SrcRect { get; set; }
-
-		public bool Invaladited { get; set; }
 
 		public int Opacity { get; set; } = 255;
 
@@ -58,11 +63,14 @@ namespace RgssSharp.Rgss
 
 		public void Draw()
 		{
+			if (!Visible || Opacity == 0 || Bitmap == null)
+				return;
 			var vector = new Vector2(X - Ox, Y - Oy);
 			var scale = new Vector2(ZoomX, ZoomY); // TODO: ???????????
 			var effect = Mirror ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 			if (BushDepth > 0)
 			{
+
 			}
 			else
 			{
@@ -73,32 +81,34 @@ namespace RgssSharp.Rgss
 
 		public void Update()
 		{
-			if (Viewport != null)
-				Viewport.PendingRenders.Add(this);
-			else
-				Graphics.PendingRenders.Add(this);
+
 		}
 
 		public bool IsDisposed()
 		{
-			throw new NotImplementedException();
+			return _isDisposed;
 		}
 
-		void IDisposable.Dispose()
+		public void Dispose()
 		{
-			throw new NotImplementedException();
+			if (_isDisposed)
+				return;
+			if (Viewport != null)
+				Viewport.RemoveRender(this);
+			else
+				Graphics.RemoveRender(this);
+			Bitmap.Dispose();
+			_isDisposed = true;
 		}
 
 		#endregion
 
-		public void Dispose()
-		{
-			Bitmap.Dispose();
-		}
+
 
 		private XnaColor GetRenderColor()
 		{
-			return new XnaColor(255, 255, 255, 255);
+			// TODO: Implement blending color, tone, opacity, and flash color
+			return new XnaColor(255, 255, 255, Opacity);
 		}
 	}
 }

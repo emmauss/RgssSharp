@@ -6,6 +6,7 @@ using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using Microsoft.Xna.Framework;
 using SD = System.Drawing;
 using XnaColor = Microsoft.Xna.Framework.Color;
 using XnaPoint = Microsoft.Xna.Framework.Point;
@@ -14,6 +15,7 @@ using XnaRect = Microsoft.Xna.Framework.Rectangle;
 
 namespace RgssSharp.Rgss
 {
+	[RubyClass("Bitmap", Inherits = typeof(Object))]
 	public class Bitmap : RenderTarget2D, IDisposable
 	{
 		#region TextAlign enum

@@ -1,5 +1,6 @@
 ﻿using IronRuby.Runtime;
 using System;
+using IronRuby.Builtins;
 
 namespace RgssSharp.Rgss
 {
@@ -13,6 +14,7 @@ namespace RgssSharp.Rgss
 	/// <seealso cref="T:RgssSharp.Rgss.Plane" />
 	/// <seealso cref="T:RgssSharp.Rgss.Tilemap" />
 	/// <seealso cref="T:RgssSharp.Rgss.Window" />
+	[RubyModule("Renderable", DefineIn = typeof(RubyModule))]
 	public interface IRenderable : IComparable<IRenderable>, IDisposable
 	{
 		/// <summary>
@@ -27,8 +29,6 @@ namespace RgssSharp.Rgss
 		/// <para>All values are relative to the <see cref="Viewport"/> they are contained in, while a <see cref="Sprite"/> without a Viewport is ordered independently along with each Viewport.</para>
 		/// </remarks>
 		int Z { get; set; }
-
-		bool Invaladited { get; set; }
 
 		/// <summary>
 		/// Gets or sets the opacity.

@@ -1,9 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using IronRuby.Runtime;
 using Microsoft.Xna.Framework.Graphics;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace RgssSharp.Rgss
 {
+	[RubyClass("Autotile", Inherits = typeof(Object))]
 	public class Autotile
 	{
 

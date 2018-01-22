@@ -18,6 +18,7 @@ namespace RgssSharp.Rgss
 	/// </summary>
 	/// <seealso cref="T:RgssSharp.Rgss.Bitmap" />
 	/// <seealso cref="T:System.IDisposable" />
+	[RubyClass("Font", Inherits = typeof(Object))]
 	public class Font : IDisposable
 	{
 		#region Static

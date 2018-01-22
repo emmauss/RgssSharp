@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using IronRuby.Runtime;
 
 namespace RgssSharp.Rgss
 {
+	[RubyClass("Tilemap", Inherits = typeof(Object))]
 	public class Tilemap
 	{
 

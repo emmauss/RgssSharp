@@ -1,5 +1,6 @@
 ﻿using System;
 using IronRuby.Builtins;
+using IronRuby.Runtime;
 
 namespace RgssSharp.Rgss
 {
@@ -7,6 +8,7 @@ namespace RgssSharp.Rgss
 	/// The multidimensional array class. 
 	/// Each element takes up 2 signed bytes (<see langword="short"/>), ranging from -32,768 to 32,767.
 	/// </summary>
+	[RubyClass("Table", Inherits = typeof(Object))]
 	[Serializable]
 	public class Table
 	{

@@ -1,10 +1,12 @@
-﻿using IronRuby.Runtime;
+﻿using System;
+using IronRuby.Runtime;
 using Microsoft.Xna.Framework;
 using SD = System.Drawing;
 
 namespace RgssSharp.Rgss
 {
-	public struct Rect
+	[RubyClass("Rect", Inherits = typeof(Object))]
+	public class Rect
 	{
 		public static readonly Rect EMPTY = new Rect(0, 0, 0, 0);
 

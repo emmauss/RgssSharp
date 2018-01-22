@@ -24,6 +24,7 @@ namespace RgssSharp
 		{
 			
 			Ruby.Initialize();
+			Audio.Initialize();
 			graphics = new GraphicsDeviceManager(this);
 		}
 
@@ -41,7 +42,7 @@ namespace RgssSharp
 		}
 
 
-		private Bitmap testBitmap;
+		private Bitmap testBitmap, testBitmap2;
 		private Sprite sprite;
 
 		/// <summary>
@@ -58,6 +59,12 @@ namespace RgssSharp
 
 			testBitmap = new Bitmap("012-Lancer04.png");
 
+			testBitmap2 = new Bitmap(500, 456);
+
+
+			testBitmap2.StretchBlt(testBitmap2.Rect, testBitmap, testBitmap.Rect);
+
+
 			/*
 			var timer = new Stopwatch();
 			var counter = 5000;
@@ -71,7 +78,7 @@ namespace RgssSharp
 			*/
 
 
-			testBitmap.HueChange(60);
+			//testBitmap.HueChange(60);
 			//testBitmap.Font = new Rgss.Font("OptimusPrinceps", 18);
 
 			//testBitmap.FillRect(8, 8, 96, 16, new Color(255, 32, 64, 240));
@@ -119,7 +126,7 @@ namespace RgssSharp
 			
 			GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.SlateBlue);
 			spriteBatch.Begin();
-			spriteBatch.Draw(testBitmap, testBitmap.Rect, Microsoft.Xna.Framework.Color.White);
+			spriteBatch.Draw(testBitmap2, testBitmap2.Rect, Microsoft.Xna.Framework.Color.White);
 			spriteBatch.End();
 
 			base.Draw(gameTime);

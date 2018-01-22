@@ -1,10 +1,12 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using System.Linq;
+using IronRuby.Builtins;
 using IronRuby.Runtime;
 using Xna = Microsoft.Xna.Framework;
 
 namespace RgssSharp.Rgss
 {
+	[RubyModule("Input", DefineIn = typeof(RubyModule))]
 	public static class Input
 	{
 		public const int NUMBER_PLAYERS = 0;

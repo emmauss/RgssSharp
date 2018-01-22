@@ -5,10 +5,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RgssSharp.Rgss
 {
+	[RubyClass("Viewport", Inherits = typeof(Object))]
 	public class Viewport : RenderTarget2D, IRenderable
 	{
-		internal List<IRenderable> PendingRenders { get; } = new List<IRenderable>();
-
+		private List<IRenderable> _pendingRenders;
 		private Color _flashColor;
 		private int _flashDuration;
 
@@ -33,20 +33,21 @@ namespace RgssSharp.Rgss
 		public Viewport(int x, int y, int width, int height) : base(Graphics.Device, width, height)
 		{
 			Rect = new Rect(x, y, width, height);
-			Graphics.PendingRenders.Add(this);
+			Graphics.AddRender(this);
 		}
 
 		public Viewport(Rect rect) : base(Graphics.Device, rect.Width, rect.Height)
 		{
 			Rect = rect;
-			Graphics.PendingRenders.Add(this);
+			Graphics.AddRender(this);
 		}
 
 		public new void Dispose()
 		{
-			foreach (var render in PendingRenders)
+			foreach (var render in _pendingRenders)
 				render.Dispose();
-			PendingRenders.Clear();
+			_pendingRenders.Clear();
+			Graphics.RemoveRender(this);
 			base.Dispose();
 		}
 
@@ -58,22 +59,13 @@ namespace RgssSharp.Rgss
 
 		public void Draw()
 		{
-			// Ideally some of this would have been placed in Update(), but RMXP specifies that
-			// Viewports only need updated if they are flashing, so have to place elsewhere.
-			if (Visible && Opacity > 0)
-			{
-				PendingRenders.RemoveAll(render => render.IsDisposed());
-				PendingRenders.Sort();
-				Graphics.Device.SetRenderTarget(this);
-				foreach (var render in PendingRenders)
-				{
-					if (!render.Invaladited)
-						continue;
-					render.Draw();
-				}
-				if (_flashDuration > 0)
-					Graphics.SpriteBatch.Draw(this, Rect, _flashColor);
-			}
+			if (!Visible || Opacity <= 0) 
+				return;
+			Graphics.Device.SetRenderTarget(this);
+			foreach (var render in _pendingRenders)
+				render.Draw();
+			if (_flashDuration > 0)
+				Graphics.SpriteBatch.Draw(this, Rect, _flashColor);
 		}
 
 		public void Update()
@@ -91,6 +83,17 @@ namespace RgssSharp.Rgss
 		public int CompareTo(IRenderable other)
 		{
 			return Z.CompareTo(other.Z);
+		}
+
+		internal void AddRender(IRenderable sprite)
+		{
+			_pendingRenders.Add(sprite);
+			_pendingRenders.Sort();
+		}
+
+		internal void RemoveRender(IRenderable sprite)
+		{
+			_pendingRenders.Remove(sprite);
 		}
 	}
 }

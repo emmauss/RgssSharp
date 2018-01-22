@@ -1,7 +1,11 @@
-﻿using IronRuby.Builtins;
+﻿using System;
+using IronRuby.Builtins;
+using IronRuby.Runtime;
 
 namespace RgssSharp.Rgss
 {
+	[RubyClass("Tone", Inherits = typeof(Object))]
+	[Serializable]
 	public class Tone
 	{
 		public static readonly Tone NONE = new Tone(0.0f, 0.0f, 0.0f);
